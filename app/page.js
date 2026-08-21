@@ -5,29 +5,25 @@ import React, { useState } from 'react';
 export default function BharatStockIQMaster() {
   const [activeTab, setActiveTab] = useState('landing');
   const [userRole, setUserRole] = useState('guest'); // 'guest', 'user', 'admin'
-  const [authModal, setAuthModal] = useState(null); // 'login' or 'signup'
+  const [authModal, setAuthModal] = useState(null); 
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   
-  // Stock Search State
   const [stockQuery, setStockQuery] = useState('');
   const [stockResult, setStockResult] = useState(null);
 
-  // Mock Database for IPOs
   const upcomingIPOs = [
     { name: "Apex FinTech Ltd.", priceBand: "₹450 - ₹475", openDate: "25 Aug 2026", rating: "Strong Subscribe", view: "High growth potential in digital lending." },
     { name: "GreenEnergy Infra", priceBand: "₹180 - ₹195", openDate: "28 Aug 2026", rating: "Avoid / Risky", view: "High valuation, weak cash flows." },
     { name: "Bharat Retail Corp", priceBand: "₹820 - ₹850", openDate: "02 Sep 2026", rating: "Subscribe for Listing Gain", view: "Strong brand presence and DII backing." }
   ];
 
-  // Stock Database with Ratings & Fundamentals
   const stockDatabase = {
     "RELIANCE": { name: "Reliance Industries", ltp: "₹2,940.50", change: "+1.8%", rating: "Strong Buy", pe: "28.4", fii: "22.5%", dii: "16.1%", public: "61.4%" },
     "TCS": { name: "Tata Consultancy Services", ltp: "₹4,120.00", change: "+0.6%", rating: "Buy / Accumulate", pe: "31.2", fii: "13.2%", dii: "9.5%", public: "77.3%" },
     "ZOMATO": { name: "Zomato Ltd.", ltp: "₹215.40", change: "-1.2%", rating: "Hold / Neutral", pe: "140.5", fii: "42.1%", dii: "18.4%", public: "39.5%" }
   };
 
-  // Live Market News
   const marketNews = [
     { title: "RBI Keeps Repo Rate Unchanged at 6.5%, Focus Remains on Withdrawal of Accommodation", time: "2 hours ago", category: "India" },
     { title: "US Fed Signals Potential Rate Cut in Upcoming September FOMC Meeting", time: "4 hours ago", category: "Global" },
@@ -92,7 +88,6 @@ export default function BharatStockIQMaster() {
       {/* Main Dynamic Container */}
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
         
-        {/* 1. LANDING PAGE TAB */}
         {activeTab === 'landing' && (
           <div>
             <div style={{ textAlign: 'center', padding: '60px 20px', background: 'linear-gradient(180deg, #0f172a 0%, #030712 100%)', borderRadius: '16px', border: '1px solid #1e293b', marginBottom: '40px' }}>
@@ -121,13 +116,11 @@ export default function BharatStockIQMaster() {
           </div>
         )}
 
-        {/* 2. MARKETS & STOCK ANALYSIS TAB */}
         {activeTab === 'dashboard' && (
           <div>
             <h2 style={{ fontSize: '1.8rem', marginBottom: '8px' }}>Stock & Institutional Intelligence Dashboard</h2>
             <p style={{ color: '#9ca3af', marginBottom: '30px' }}>Search any stock to analyze fundamental ratings, P/E ratios, and shareholding patterns (FII, DII, Public).</p>
 
-            {/* Stock Search Box */}
             <div style={{ background: '#0f172a', padding: '24px', borderRadius: '12px', border: '1px solid #1e293b', marginBottom: '30px' }}>
               <form onSubmit={handleStockSearch} style={{ display: 'flex', gap: '12px' }}>
                 <input 
@@ -156,7 +149,6 @@ export default function BharatStockIQMaster() {
               )}
             </div>
 
-            {/* Live Financial News Section (India & World) */}
             <div style={{ background: '#0f172a', padding: '24px', borderRadius: '12px', border: '1px solid #1e293b', marginBottom: '30px' }}>
               <h3 style={{ margin: '0 0 15px 0', fontSize: '1.2rem', color: '#38bdf8' }}>📰 Live Market News (India & Global)</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -174,7 +166,6 @@ export default function BharatStockIQMaster() {
           </div>
         )}
 
-        {/* 3. IPO RADAR TAB */}
         {activeTab === 'ipo' && (
           <div>
             <h2 style={{ fontSize: '1.8rem', marginBottom: '8px' }}>Upcoming IPO Tracker & Expert Ratings</h2>
@@ -199,7 +190,6 @@ export default function BharatStockIQMaster() {
           </div>
         )}
 
-        {/* 4. PREMIUM PLANS & COURSES TAB */}
         {activeTab === 'premium' && (
           <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '2rem', marginBottom: '8px' }}>Unlock BharatStock IQ Pro Membership</h2>
@@ -231,7 +221,6 @@ export default function BharatStockIQMaster() {
           </div>
         )}
 
-        {/* 5. ADMIN CONTROL PANEL TAB (Only for Admin) */}
         {activeTab === 'admin' && userRole === 'admin' && (
           <div style={{ background: '#0f172a', padding: '30px', borderRadius: '16px', border: '1px solid #7c3aed' }}>
             <h2 style={{ color: '#c084fc', marginTop: 0 }}>⚙️ Personal Admin Control Dashboard</h2>
@@ -254,14 +243,13 @@ export default function BharatStockIQMaster() {
 
       </main>
 
-      {/* LOGIN / SIGNUP MODAL POPUP */}
       {authModal && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
           <div style={{ background: '#0f172a', padding: '30px', borderRadius: '12px', border: '1px solid #374151', width: '350px' }}>
             <h3 style={{ margin: '0 0 15px 0', color: '#38bdf8' }}>{authModal === 'login' ? 'Member Login' : 'Create Account'}</h3>
             <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <input type="email" placeholder="Email (use admin@bharatstockiq.in for admin)" value={emailInput} onChange={(e) => setEmailInput(e.target.value)} style={{ padding: '10px', background: '#030712', border: '1px solid #374151', color: '#fff', borderRadius: '6px' }} required />
-              <input type="password" placeholder="Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={{ padding: '10px', background: '#030712', border: '1px solid #374151', color: '#fff', borderRadius: '6px' }} required />
+              <input type="password" placeholder="Password" value={passwordOutput => passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={{ padding: '10px', background: '#030712', border: '1px solid #374151', color: '#fff', borderRadius: '6px' }} required />
               <button type="submit" style={{ background: '#0284c7', color: '#fff', border: 'none', padding: '10px', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}>Continue</button>
             </form>
             <button onClick={() => setAuthModal(null)} style={{ background: 'transparent', border: 'none', color: '#9ca3af', marginTop: '15px', cursor: 'pointer', width: '100%' }}>Cancel</button>
